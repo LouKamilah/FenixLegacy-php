@@ -1,0 +1,9 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer components {
+  .form {
+    @apply flex flex-col justify-center p-12 mt-12 rounded-2xl w-96 h-96;
+  }
+}
