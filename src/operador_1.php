@@ -22,7 +22,7 @@ if (empty($_SESSION["id_login"])) {
 </head>
 
 <nav class="relative px-4 py-2 flex justify-between items-center bg-white font-mont font-semibold">
-    <p class="font-mont font-extrabold text-indigo-900 text-3xl ml-6 select-none">FENIX</p>
+    <p class="font-mont font-extrabold text-black text-3xl ml-6 select-none">FENIX</p>
     <ul
         class="absolute top-1/2 left-1/2 transform -translate-y-1/2 -translate-x-1/2 lg:mx-auto lg:flex lg:items-center lg:w-auto lg:space-x-6">
         <li>
@@ -33,7 +33,7 @@ if (empty($_SESSION["id_login"])) {
     </ul>
 
     <div class=" lg:flex">
-        <button class="cursor-auto py-1.5 px-3 m-1 text-center bg-indigo-900 border rounded-md text-white select-none">
+        <button class="cursor-auto py-1.5 px-3 m-1 text-center bg-black border rounded-md text-white select-none">
             <?php
                 include "conexion.php";
                 include "controlador/controlador_login.php";
@@ -47,9 +47,10 @@ if (empty($_SESSION["id_login"])) {
     <title>Operador</title>
     <div class="flex flex-col items-center justify-center">
 
-        <form
-            class="bg-white shadow-6xl shadow-indigo-400/100 flex flex-col justify-center p-12 rounded-2xl w-auto h-auto"
-            action="" method="POST">
+        <form class="bg-white shadow-6xl flex flex-col justify-center p-12 rounded-2xl w-auto h-auto" action=""
+            method="POST">
+
+            <h1 class="py-6 text-xl font-bold">Cargas</h1>
 
             <!--Search Bar-->
 
@@ -67,7 +68,7 @@ if (empty($_SESSION["id_login"])) {
                     placeholder=" Buscar cliente"
                     value="<?php echo isset($_POST["buscar"]) ? $_POST["buscar"] : '' ?>" />
                 <button type="submit" id="busqueda" name="Busqueda" value="Busqueda"
-                    class="text-white absolute end-2.5 bottom-2.5 bg-indigo-900 hover:bg-indigo-800 focus:outline-none font-medium rounded-lg text-sm px-4 py-2">Buscar</button>
+                    class="text-white absolute end-2.5 bottom-2.5 bg-black focus:outline-none font-medium rounded-lg text-sm px-4 py-2">Buscar</button>
             </div>
 
 
@@ -85,9 +86,6 @@ if (empty($_SESSION["id_login"])) {
                             </th>
                             <th scope="col" class="px-6 py-3">
                                 Sacos
-                            </th>
-                            <th scope="col" class="px-6 py-3">
-                                Action
                             </th>
                         </tr>
                     </thead>
@@ -107,7 +105,7 @@ if (empty($_SESSION["id_login"])) {
 
                     <tbody>
                         <tr class="bg-white border-b text-center">
-                            <th scope="row" class="px-6 py-4 font-medium text-gray-900 whitespace-nowrap">
+                            <th scope="row" class="px-6 py-6 font-medium text-gray-900 whitespace-nowrap">
                                 <?= $numero_carga?>
                             </th>
                             <td class="px-6 py-4">
@@ -117,8 +115,8 @@ if (empty($_SESSION["id_login"])) {
                                 <?= $cantidad_sacos ?>
                             </td>
                             <td class="px-6 py-4">
-                                <a href="operador_2.php?id=<?= $id_carga ?>&idsaco="
-                                    class="text-white bg-indigo-900 hover:bg-indigo-900 focus:ring-4 focus:ring-blue-300 font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none cursor-pointer">Escanear</a>
+                                <button type="button" onclick="openModal(<?= $id_carga ?>)"
+                                    class="text-white bg-black font-medium rounded-lg text-sm px-5 py-2.5 me-2 mb-2 focus:outline-none cursor-pointer">Escanear</button>
                             </td>
                         </tr>
                         <?php   
@@ -130,13 +128,89 @@ if (empty($_SESSION["id_login"])) {
 
             <div>
                 <a href="controlador/controlador_logout.php"
-                    class="ml-36 mr-36 mt-5 py-1.5 px-3 m-1 -mb 4 cursor-pointer text-center bg-indigo-900 border rounded-md text-white hover:bg-indigo-800 hover:text-gray-100 lg:block select-none">Cerrar
+                    class="ml-36 mr-36 mt-5 py-1.5 px-3 m-1 -mb 4 cursor-pointer text-center bg-black border rounded-md text-white hover:text-gray-100 lg:block select-none">Cerrar
                     Sesión</a>
             </div>
         </form>
     </div>
 
-    <script src="./node_modules/flowbite/dist/flowbite.min.js"></script>
+    <!-- Modal para el escaneo -->
+    <div id="scannerModal" class="fixed inset-0 bg-gray-800 bg-opacity-75 flex items-center justify-center hidden">
+        <div class="bg-white p-5 rounded-lg relative w-full max-w-lg mx-auto">
+            <button type="button" onclick="closeModal()" class="absolute top-2 right-2 text-gray-500"><svg
+                    class="w-6 h-6 text-gray-800" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" width="24"
+                    height="24" fill="none" viewBox="0 0 24 24">
+                    <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                        d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
+                </svg>
+            </button>
+            <div class="text-center pt-2 pb-2 font-mont font-semibold text-xl" id="modalTitle"></div>
+            <div id="camera" class="h-96"></div>
+            <form id="scannerForm" action="operador_2.php" method="GET" class="flex flex-col items-center">
+                <input type="hidden" name="id" id="modalId">
+                <input type="text" name="idsaco" id="resultado" readonly
+                    class="text-center border border-gray-950 outline-none">
+                <input type="submit" value="Guardar"
+                    class="bg-gray-900 rounded-xl text-white w-32 py-2 cursor-pointer font-semibold mt-4">
+            </form>
+        </div>
+    </div>
+
+    <!-- QuaggaJS -->
+    <script src="quagga.min.js"></script>
+    <script>
+    function openModal(id) {
+        document.getElementById("modalId").value = id;
+        document.getElementById("modalTitle").innerText = "Carga = " + id;
+        document.getElementById("scannerModal").classList.remove("hidden");
+        startQuagga();
+    }
+
+    function closeModal() {
+        document.getElementById("scannerModal").classList.add("hidden");
+        stopQuagga();
+    }
+
+    function startQuagga() {
+        Quagga.init({
+            inputStream: {
+                name: "Live",
+                type: "LiveStream",
+                target: document.querySelector('#camera')
+            },
+            decoder: {
+                readers: ["code_128_reader"]
+            }
+        }, function(err) {
+            if (err) {
+                console.log(err);
+                return;
+            }
+            console.log("Initialization finished. Ready to start");
+            Quagga.start();
+        });
+
+        Quagga.onDetected(function(data) {
+            console.log(data);
+            document.getElementById("resultado").value = data.codeResult.code;
+        });
+    }
+
+    function stopQuagga() {
+        Quagga.stop();
+    }
+
+    document.getElementById("scannerForm").addEventListener("submit", function(event) {
+        if (document.getElementById("resultado").value === "") {
+            event.preventDefault();
+            alert("Por favor, escanee un código antes de guardar.");
+        } else {
+            closeModal();
+        }
+    });
+    </script>
+
+    <script src="../node_modules/flowbite/dist/flowbite.min.js"></script>
 
 </body>
 <script src="js/page_operador.js"></script>
