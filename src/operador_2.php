@@ -82,8 +82,9 @@ $sql = $conexion->query("SELECT carga.id_carga As idcarga, carga.numero_carga As
 
 <body>
 
-    <div class="flex flex-col items-center justify-center">
-        <form class="bg-white shadow-6xl p-12 rounded-2xl w-auto h-auto" action="" method="POST" id="formsaco">
+    <div class="flex flex-col items-center justify-center p-4 sm:p-8">
+        <form class="bg-white shadow-6xl p-6 sm:p-12 rounded-2xl w-full max-w-2xl" action="" method="POST"
+            id="formsaco">
             <?php 
             while ($datos = $sql->fetch_object()) {?>
             <div class="pt-7 text-md text-center font-mont font-bold text-indigo-900 select-none">
@@ -110,9 +111,9 @@ $sql = $conexion->query("SELECT carga.id_carga As idcarga, carga.numero_carga As
 
             <br>
 
-            <div class="bg-black text-white font-semibold w-60 rounded-2xl py-2 mx-auto">
-                <input class="bg-black text-center ml-5 cursor-default outline-none" type="text" name="registro"
-                    value="<?php echo $cantidadSacosRestantes ?>" readonly>
+            <div class="bg-black text-white font-semibold w-full sm:w-60 rounded-2xl py-2 mx-auto">
+                <input class="bg-black text-center rounded-2xl cursor-default outline-none w-full" type="text"
+                    name="registro" value="<?php echo $cantidadSacosRestantes ?>" readonly>
                 <p class="text-center cursor-default select-none">Cantidad Sacos Restantes</p>
             </div>
 
@@ -203,11 +204,11 @@ $sql = $conexion->query("SELECT carga.id_carga As idcarga, carga.numero_carga As
 
             <div class="flex flex-col justify-center mt-2">
                 <input type="submit" name="btnguardar" value="GUARDAR"
-                    class="bg-black text-white font-mont font-semibold rounded-xl p-2 w-[50%] text-center mx-auto cursor-pointer mt-4">
+                    class="bg-black text-white font-mont font-semibold rounded-xl p-2 w-full sm:w-[50%] text-center mx-auto cursor-pointer mt-4">
             </div>
             <br>
             <a href="operador_1.php"
-                class="mx-auto flex items-center justify-center h-12 px-6 w-72 bg-black mt-5 rounded-2xl font-semibold text-lg text-blue-50 select-none">VOLVER</a>
+                class="mx-auto flex items-center justify-center h-12 px-6 w-full sm:w-72 bg-black mt-5 rounded-2xl font-semibold text-lg text-blue-50 select-none">VOLVER</a>
             <input name="txtresponsable" id="responsable" value="<?php echo $_SESSION['idOp'] ?>" type="text" hidden>
             <?php 
             error_reporting(0);
@@ -271,7 +272,8 @@ $sql = $conexion->query("SELECT carga.id_carga As idcarga, carga.numero_carga As
                             width="24" height="24" fill="none" viewBox="0 0 24 24">
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
                                 d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
-                        </svg></button>
+                        </svg>
+                    </button>
                     <div class="text-center pt-2 pb-2 font-mont font-semibold text-xl">
                         <?php echo "Carga = " . $id; ?>
                     </div>
@@ -279,9 +281,10 @@ $sql = $conexion->query("SELECT carga.id_carga As idcarga, carga.numero_carga As
                     <form id="scannerForm" action="operador_2.php?id=<?= $id ?>" method="POST"
                         class="flex flex-col items-center">
                         <input type="hidden" name="id" value="<?= $id ?>">
-                        <input type="text" name="resultado" id="resultado" readonly class="text-center">
+                        <input type="text" name="resultado" id="resultado" readonly
+                            class="text-center border border-gray-950 outline-none mt-24 sm:mt-0 w-full sm:w-auto mb-4">
                         <input type="submit" value="Guardar"
-                            class="bg-gray-900 rounded-xl text-white w-32 py-2 cursor-pointer font-semibold mt-4">
+                            class="bg-gray-900 rounded-xl text-white w-full mt-3 sm:mt-0 sm:w-32 py-2 cursor-pointer font-semibold">
                     </form>
                 </div>
             </div>

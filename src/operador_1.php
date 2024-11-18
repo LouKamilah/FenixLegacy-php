@@ -45,10 +45,10 @@ if (empty($_SESSION["id_login"])) {
 
 <body>
     <title>Operador</title>
-    <div class="flex flex-col items-center justify-center">
+    <div class="flex flex-col items-center justify-center px-4 sm:px-0">
 
-        <form class="bg-white shadow-6xl flex flex-col justify-center p-12 rounded-2xl w-auto h-auto" action=""
-            method="POST">
+        <form class="bg-white shadow-6xl flex flex-col justify-center p-6 sm:p-12 rounded-2xl w-full sm:w-auto h-auto"
+            action="" method="POST">
 
             <h1 class="py-6 text-xl font-bold">Cargas</h1>
 
@@ -87,6 +87,7 @@ if (empty($_SESSION["id_login"])) {
                             <th scope="col" class="px-6 py-3">
                                 Sacos
                             </th>
+                            <th></th>
                         </tr>
                     </thead>
 
@@ -126,9 +127,9 @@ if (empty($_SESSION["id_login"])) {
                 </table>
             </div>
 
-            <div>
+            <div class="flex justify-center mt-5">
                 <a href="controlador/controlador_logout.php"
-                    class="ml-36 mr-36 mt-5 py-1.5 px-3 m-1 -mb 4 cursor-pointer text-center bg-black border rounded-md text-white hover:text-gray-100 lg:block select-none">Cerrar
+                    class="py-1.5 px-3 m-1 cursor-pointer text-center bg-black border rounded-md text-white hover:text-gray-100 select-none">Cerrar
                     Sesión</a>
             </div>
         </form>
@@ -145,13 +146,13 @@ if (empty($_SESSION["id_login"])) {
                 </svg>
             </button>
             <div class="text-center pt-2 pb-2 font-mont font-semibold text-xl" id="modalTitle"></div>
-            <div id="camera" class="h-96"></div>
-            <form id="scannerForm" action="operador_2.php" method="GET" class="flex flex-col items-center">
+            <div id="camera" class="h-96 sm:h-96"></div>
+            <form id="scannerForm" action="operador_2.php" method="GET" class="flex flex-col items-center mt-4">
                 <input type="hidden" name="id" id="modalId">
                 <input type="text" name="idsaco" id="resultado" readonly
-                    class="text-center border border-gray-950 outline-none">
+                    class="text-center border border-gray-950 outline-none mt-24 sm:mt-0 w-full sm:w-auto mb-4">
                 <input type="submit" value="Guardar"
-                    class="bg-gray-900 rounded-xl text-white w-32 py-2 cursor-pointer font-semibold mt-4">
+                    class="bg-gray-900 rounded-xl text-white w-full mt-3 sm:mt-0 sm:w-32 py-2 cursor-pointer font-semibold">
             </form>
         </div>
     </div>
