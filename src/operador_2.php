@@ -274,17 +274,16 @@ $sql = $conexion->query("SELECT carga.id_carga As idcarga, carga.numero_carga As
                                 d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                         </svg>
                     </button>
-                    <div class="text-center pt-2 pb-2 font-mont font-semibold text-xl">
-                        <?php echo "Carga = " . $id; ?>
-                    </div>
-                    <div id="camera" class="h-96"></div>
+                    <div id="camera" class="h-96 mt-5"></div>
                     <form id="scannerForm" action="operador_2.php?id=<?= $id ?>" method="POST"
                         class="flex flex-col items-center">
                         <input type="hidden" name="id" value="<?= $id ?>">
-                        <input type="text" name="resultado" id="resultado" readonly
-                            class="text-center border border-gray-950 outline-none mt-24 sm:mt-0 w-full sm:w-auto mb-4">
-                        <input type="submit" value="Guardar"
-                            class="bg-gray-900 rounded-xl text-white w-full mt-3 sm:mt-0 sm:w-32 py-2 cursor-pointer font-semibold">
+                        <div class="flex flex-col w-full sm:w-auto space-y-3">
+                            <input type="text" name="resultado" id="resultado" readonly=""
+                                class="text-center border border-gray-950 outline-none mt-24 sm:mt-0 w-full sm:w-[50%] mx-auto mb-4">
+                            <input type="submit" value="Guardar"
+                                class="bg-gray-900 rounded-xl text-white w-full mt-3 sm:mt-0 sm:w-32 py-2 cursor-pointer font-semibold mx-auto">
+                        </div>
                     </form>
                 </div>
             </div>
@@ -293,13 +292,16 @@ $sql = $conexion->query("SELECT carga.id_carga As idcarga, carga.numero_carga As
             <script src="quagga.min.js"></script>
             <script>
             function openModal() {
-                document.getElementById("scannerModal").classList.remove("hidden");
-                startQuagga();
+                const modal = document.getElementById('scannerModal');
+                modal.classList.remove('hidden');
+                modal.classList.add('flex');
+                startQuagga(); // Inicia QuaggaJS cuando se abre el modal
             }
 
             function closeModal() {
-                document.getElementById("scannerModal").classList.add("hidden");
-                stopQuagga();
+                const modal = document.getElementById('scannerModal');
+                modal.classList.remove('flex');
+                modal.classList.add('hidden');
             }
 
             function startQuagga() {

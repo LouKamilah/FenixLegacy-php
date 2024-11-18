@@ -145,8 +145,7 @@ if (empty($_SESSION["id_login"])) {
                         d="m15 9-6 6m0-6 6 6m6-3a9 9 0 1 1-18 0 9 9 0 0 1 18 0Z" />
                 </svg>
             </button>
-            <div class="text-center pt-2 pb-2 font-mont font-semibold text-xl" id="modalTitle"></div>
-            <div id="camera" class="h-96 sm:h-96"></div>
+            <div id="camera" class="h-96 sm:h-96 mt-5"></div>
             <form id="scannerForm" action="operador_2.php" method="GET" class="flex flex-col items-center mt-4">
                 <input type="hidden" name="id" id="modalId">
                 <input type="text" name="idsaco" id="resultado" readonly
@@ -162,7 +161,6 @@ if (empty($_SESSION["id_login"])) {
     <script>
     function openModal(id) {
         document.getElementById("modalId").value = id;
-        document.getElementById("modalTitle").innerText = "Carga = " + id;
         document.getElementById("scannerModal").classList.remove("hidden");
         startQuagga();
     }
